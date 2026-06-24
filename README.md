@@ -1,59 +1,47 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PWA Project - Web Application Specification and Description
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a multi-role web application developed using the Laravel framework, fully compliant with all the required criteria and implementation standards for the **Programming of Web Applications (PWA)** university course.
 
-## About Laravel
+* **Project Name (Folder):** aivankovic
+* **Database Name:** aivankovic
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🏫 Project Context & Design Disclaimer
+> ⚠️ **Note for Reviewers:** This application was developed strictly as a **school/academic project** for a university course. The primary focus of development was entirely on **backend architecture, core functionalities, security, and database relational integrity**. Minimal focus was placed on custom frontend design, as UI layout relies on standard template integration rather than bespoke styling.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 💻 Application Features & Overview
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 1. Public Facing Website (Accessible to all visitors)
+* **Home Page:** A completely dynamic landing page that fetches and displays featured/selected records from the database in a dedicated *"Offer of the Month"* or *"Featured Items"* section.
+* **Catalog / Product Showcase:** A complete list of items retrieved from the database, where each item features a functional *"Read More"* or *"Details"* link leading to a dedicated page showing the full specifications of that specific record.
+* **Contact Page:** Displays transparent contact information along with an integrated responsive map.
+* **UI/UX Design:** Built using a clean, fully responsive HTML template tailored for all screen sizes, featuring a functional responsive navigation menu and a transparent logo in the header.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Registered Users Area (`Role: Registered`)
+* **User Profile Dashboard:** A dedicated page displaying a complete list of the logged-in user's personal data (such as order history, reservations, or user-generated posts depending on the theme).
+* **Protected Functionalities:** Advanced features such as ordering forms, booking modules, rating, or commenting systems are accessible exclusively to authenticated users via hidden navigation links that appear only after a successful login.
 
-## Laravel Sponsors
+### 3. Editor & Administration Panel (`/admin` prefix)
+* **Main Dashboard:** The admin home page features an integrated dynamic **Google Chart** component for a visual overview of business statistics (e.g., number of orders per day).
+* **Advanced CRUD Systems:** Implemented complete CRUD workflows for at least 3 distinct entities, rendered beautifully using the **DataTables** component (Overview, Create New, Edit, Delete).
+* **Feature Toggle (Home Page Promotion):** Admin management tables include a built-in toggle option, allowing administrators to feature or un-feature any database record on the public home page with a single click.
+* **WYSIWYG Editor:** Integrated an advanced rich-text editor (such as Summernote/TinyMCE) within the create and edit forms for streamlined content formatting.
+* **File Upload Implementation:** Implemented a secure file upload system for uploading and storing entity media files (e.g., product images).
+* **Validation Protocols:** Dual-layer validation is enforced across all forms—combining basic frontend validation (required, type) with robust backend validation via Laravel Form Requests.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🛠️ Technical Specifications & Architecture
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+The project has been architected following industry-standard positive practices of the Laravel ecosystem:
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* **Models & Migrations:** Developed **4 core models** with properly defined and utilized database relationships, managed by **4 migration scripts** that completely map the database schema.
+* **Seeders:** Programmed **4 custom seeders**. Every single database table is pre-populated with a **minimum of 5 pre-defined (seeded) records**.
+* **Controllers:** Implemented **4 distinct controllers**, with at least 3 handling full CRUD operations.
+* **Route Grouping:** Architectural routes within `web.php` are structured using **three different grouping methods** for optimal readability and security (`Route::middleware`, `Route::prefix('admin')`, and nested groups).
+* **Authentication Engine:** The entire authentication ecosystem (Registration, Login, Password Reset) is fully handled by the official **Laravel Breeze** package.
+* **Admin Interface UI:** The administration backend utilizes a professional Bootstrap-based admin template equipped with an organized sidebar navigation.
+* **Version Control:** The repository includes a properly configured `.gitignore` file, successfully shielding sensitive deployment credentials like the local `.env` file from the public repository.
