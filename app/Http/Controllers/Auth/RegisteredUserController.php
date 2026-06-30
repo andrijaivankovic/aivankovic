@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Porudzbina;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -45,6 +46,15 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $cookie_id = $request->cookie("korpa_id");
+        if($cookie_id) {
+            Porudzbina::where("cookie_id",$cookie_id)->whereNull("user_id")->update([
+                "user_id" => $user->id,
+                "ime" => $user->name,
+                "email" => $user->email,
+            ]);
+        }
 
         return redirect(route('pocetna', absolute: false));
     }

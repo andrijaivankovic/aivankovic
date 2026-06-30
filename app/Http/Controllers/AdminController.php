@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Istaknuto;
 use App\Models\Katalog;
+use App\Models\Komentar;
 use App\Models\Porudzbina;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -68,6 +69,8 @@ class AdminController extends Controller
 
     public function obrisiProizvod($id) {
         $proizvod = Katalog::findOrFail($id);
+        Komentar::where("katalog_id", $proizvod->id)->delete();
+        Porudzbina::where("katalog_id", $proizvod->id)->delete();
         $proizvod->delete();
         return redirect()->route("listaProizvoda")->with("success","Uspesno ste obrisali proizvod iz Kataloga!");
     }
@@ -149,7 +152,7 @@ class AdminController extends Controller
     public function storeUsera(Request $request) {
         $request->validate([
             "name" => "required|min:2",
-            "email" => "required|email",
+            "email" => "required|email|unique:users",
             "role" => "required|in:user,admin,editor",
             "password" => "required|min:2",
         ]);
@@ -166,6 +169,8 @@ class AdminController extends Controller
 
     public function obrisiUsera($id) {
         $user = User::findOrFail($id);
+        Komentar::where("user_id", $user->id)->delete();
+        Porudzbina::where("user_id", $user->id)->delete();
         $user->delete();
         return redirect()->route("sviUseri")->with("success","Uspesno ste obrisali usera!");
     }

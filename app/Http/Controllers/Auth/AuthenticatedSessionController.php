@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Porudzbina;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,16 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = Auth::user();
+        $cookie_id = $request->cookie("korpa_id");
+        if($cookie_id) {
+            Porudzbina::where("cookie_id",$cookie_id)->whereNull("user_id")->update([
+                "user_id" => $user->id,
+                "ime" => $user->name,
+                "email" => $user->email,
+            ]);
+        }
 
         return redirect()->intended(route('pocetna', absolute: false));
     }

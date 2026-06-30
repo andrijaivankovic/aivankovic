@@ -7,6 +7,7 @@ use App\Models\Katalog;
 use App\Models\Komentar;
 use App\Models\Porudzbina;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class KatalogController extends Controller
 {
@@ -24,12 +25,31 @@ class KatalogController extends Controller
 
     public function poruci($id) {
         $porudzbina = new Porudzbina();
-        $porudzbina->ime = auth()->user()->name;
-        $porudzbina->email = auth()->user()->email;
         $porudzbina->katalog_id = $id;
-        $porudzbina->user_id = auth()->user()->id;
+
+        if(auth()->user()) {
+            $porudzbina->ime = auth()->user()->name;
+            $porudzbina->email = auth()->user()->email;
+            $porudzbina->user_id = auth()->user()->id;
+        } else {
+            $cookie_id = request()->cookie("korpa_id");
+            if(!$cookie_id) {
+                $cookie_id = uniqid();
+                Cookie::queue("korpa_id",$cookie_id,43200);
+            }
+            $porudzbina->ime = "Gost";
+            $porudzbina->email = "Gost";
+            $porudzbina->cookie_id = $cookie_id;
+        }
+
         $porudzbina->save();
 
-        return redirect()->route("proizvod",$id)->with("success","Uspesno ste napravili porudzbinu!");
+        $korpa = session("korpa",[]);
+        if(($key = array_search($id,$korpa)) !== false) {
+            unset($korpa[$key]);
+        }
+        session(["korpa" => $korpa]);
+
+        return redirect()->route("korpa")->with("success","Uspesno ste napravili porudzbinu!");
     }
 }

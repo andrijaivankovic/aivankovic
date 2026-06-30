@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KatalogController;
+use App\Http\Controllers\KorpaController;
 use App\Http\Controllers\PocetnaController;
 use App\Http\Controllers\PrijavaController;
 use App\Http\Controllers\ProfileController;
@@ -32,9 +33,14 @@ Route::get("/kontakt",[PocetnaController::class,"kontakt"])->name("kontakt");
 Route::get("/katalog",[KatalogController::class,"katalog"])->name("katalog");
 Route::get("proizvod/{id}",[KatalogController::class,"proizvod"])->name("proizvod");
 
+Route::get("/korpa",[KorpaController::class,"korpa"])->name("korpa");
+Route::get("dodaj_u_korpu/{id}",[KorpaController::class,"dodaj"])->name("dodaj_u_korpu");
+Route::get("izbaci_iz_korpe/{id}",[KorpaController::class,"izbaci"])->name("izbaci_iz_korpe");
+Route::get("poruci/{id}",[KatalogController::class,"poruci"])->name("poruci");
+
+
 
 Route::middleware(['auth'])->group(function () {
-Route::get("poruci/{id}",[KatalogController::class,"poruci"])->name("poruci");
 
 Route::get("moje_narudzbine/{id}",[UserController::class,"moje_narudzbine"])->name("moje_narudzbine");
 Route::get("obrisi/{id}",[UserController::class,"obrisi"])->name("obrisi");
@@ -46,6 +52,7 @@ Route::get("/update/{id}/{proizvodid}",[UserController::class,"update"])->name("
 Route::post("/update/{id}",[UserController::class,"updateStore"])->name("updateStore");
 
 Route::get("/preusmeravanje",[RedirectController::class,"preusmeravanje"])->name("preusmeravanje");
+
 
 Route::prefix("admin")->group(function () {
 

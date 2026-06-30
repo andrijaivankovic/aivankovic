@@ -28,12 +28,9 @@
                 <p>Kategorija{{ $proizvod["istaknuto"]->naziv }}</p>
                 <p class="text-muted">Cena:{{ $proizvod->cena }}rsd</p>
 
-                @if (!auth()->user())
-                    <h3>Da bi ste porucili ovaj proizvod morate se ulogovati!</h3>
-
-                @else
-                    <a href="{{ route("poruci",$proizvod->id) }}" class="btn btn-primary">Poruci</a>
-                @endif
+                
+                <a href="{{ route("dodaj_u_korpu",$proizvod->id) }}" class="btn btn-primary">Dodaj u korpu</a>
+                
             </div>
 
             

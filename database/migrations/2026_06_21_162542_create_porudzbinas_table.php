@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string("ime");
             $table->string("email");
             $table->foreignId("katalog_id")->constrained("katalogs");
-            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("user_id")->nullable()->constrained("users");
+            $table->string("cookie_id")->nullable();
             $table->timestamps();
         });
     }

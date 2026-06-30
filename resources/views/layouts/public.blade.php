@@ -75,6 +75,7 @@
 
                     
                 @endauth
+                <a href="{{ route("korpa") }}" class="nav-item nav-link">Korpa</a>
             </div>
         </div>
     </nav>
